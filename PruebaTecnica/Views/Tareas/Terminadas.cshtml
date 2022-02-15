@@ -1,0 +1,92 @@
+﻿@model IEnumerable<PruebaTecnica.Models.Tarea>
+
+@{
+    ViewData["Title"] = "Lista de Tareas Terminadas";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container" id="modeltarea">
+    @if (TempData["mensaje"] != null)
+    {
+
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            @TempData["mensaje"]
+            <button type="button" class="close" date-dismiss="alert" aria-label="close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    }
+
+
+    <div class="row">
+        <div class="col-sm-12">
+
+            <h3>@ViewData["Title"] </h3>
+        </div>
+       
+    </div>
+    <br />
+    <div class="row">
+        @if (Model.Count() > 0)
+        {
+
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <td>@Html.DisplayNameFor(m => m.NTarea)</td>
+                        <td>@Html.DisplayNameFor(m => m.Descripcion)</td>
+                        <td>@Html.DisplayNameFor(m => m.Prioridad)</td>
+                        <td>@Html.DisplayNameFor(m => m.FechaCreacion)</td>
+                        <td>@Html.DisplayNameFor(m => m.FechaFinal)</td>
+                        <td>@Html.DisplayNameFor(m => m.FechaEstimado)</td>
+                        <td>Tiempo Estimado</td>
+                        <td>Tiempo Total</td>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        if (item.Estado == true)
+                        {
+                    <tr>
+                        <td>@item.NTarea</td>
+                        <td>@item.Descripcion</td>
+                        @if (item.Prioridad == 1)
+                        {
+                            <td class="text-danger">ALTA</td>
+                        }
+                        else if (item.Prioridad == 2)
+                        {
+                            <td class="text-warning">MEDIA</td>
+                        }
+                        else
+                        {
+                            <td class="text-success">BAJA</td>
+                        }
+
+                        <td>@item.FechaCreacion</td>
+
+                        <td>@item.FechaFinal</td>
+                        <td>@item.FechaEstimado</td>
+
+                        <td>@item.TiempoEstimado</td>
+                        @{ string tiempoTotal = (item.FechaFinal - item.FechaCreacion).ToString(@"dd\.hh\:mm\:ss");}
+                        <td>@tiempoTotal</td>
+                    </tr>
+                        }
+
+                    }
+                </tbody>
+            </table>
+
+
+        }
+        else
+        {
+            <p>No existen registros aun</p>
+        }
+
+    </div>
+
+</div>
+

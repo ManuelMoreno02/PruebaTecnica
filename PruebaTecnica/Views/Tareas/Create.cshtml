@@ -1,0 +1,66 @@
+﻿@model PruebaTecnica.Models.Tarea
+
+@{
+  
+    ViewData["Title"] = "Crear nueva Tarea";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container" id="modeltarea">
+    <div class="row">
+        <div class="col-sm-12">
+            <h3>@ViewData["Title"]</h3>
+        </div>
+       
+    </div>
+    <div class="row">
+      <div class="col-sm-10">
+          <h3>@ViewBag.C</h3>
+          <form method="post" asp-action="Create">
+              <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+              <div class="form-group">
+                  <label asp-for="NTarea" class="control-label"></label>
+                  <input asp-for="NTarea" class="form-control" />
+                  <span asp-validation-for="NTarea" class="text-danger"></span>
+              </div>
+
+              <div class="form-group">
+                  <label asp-for="Descripcion" class="control-label"></label>
+                  <input asp-for="Descripcion" class="form-control" />
+                  <span asp-validation-for="Descripcion" class="text-danger"></span>
+              </div>
+
+
+              <div class="form-group">
+                  <label asp-for="Prioridad" class="control-label"></label>
+                  <select asp-for="Prioridad" class="form-control">
+                      <option value="1">ALTA</option>
+                      <option value="2">MEDIA</option>
+                      <option value="3">BAJA</option>
+
+                  </select>
+
+                  <span asp-validation-for="Prioridad" class="text-danger"></span>
+              </div>
+             
+              <div class="form-group">
+                  <label asp-for="FechaEstimado" class="control-label"></label>
+                  <input asp-for="FechaEstimado" class="form-control" />
+                  <span asp-validation-for="FechaEstimado" class="text-danger"></span>
+              </div>
+              <div class="form-group">
+
+                  <input type="submit" value="Crear Tarea" class="btn btn-primary" />
+              </div>
+          </form>
+      </div>
+
+    </div>
+
+</div>
+
+@section Scripts{ 
+@{ <partial name="_ValidationScriptsPartial.cshtml" />}
+
+}
+
